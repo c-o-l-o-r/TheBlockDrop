@@ -11,8 +11,8 @@ import SpriteKit
 
 class MGRow {
     
-    private var left = SKSpriteNode()
-    private var right = SKSpriteNode()
+    fileprivate var left = SKSpriteNode()
+    fileprivate var right = SKSpriteNode()
     
     init(scene: SKScene, height: CGFloat, color: UIColor) {
         
@@ -26,13 +26,13 @@ class MGRow {
         left.position = CGPoint(x: CGFloat(leftSize / 2), y: height)
         right.position = CGPoint(x: CGFloat(leftSize + kHOLE_SIZE + rightSize / 2), y: height)
         
-        left.physicsBody = SKPhysicsBody(rectangleOfSize: left.size)
-        left.physicsBody?.dynamic = false
+        left.physicsBody = SKPhysicsBody(rectangleOf: left.size)
+        left.physicsBody?.isDynamic = false
         left.physicsBody?.categoryBitMask = CollisionMask.Obstacle
         left.physicsBody?.contactTestBitMask = CollisionMask.Player
         
-        right.physicsBody = SKPhysicsBody(rectangleOfSize: right.size)
-        right.physicsBody?.dynamic = false
+        right.physicsBody = SKPhysicsBody(rectangleOf: right.size)
+        right.physicsBody?.isDynamic = false
         right.physicsBody?.categoryBitMask = CollisionMask.Obstacle
         right.physicsBody?.contactTestBitMask = CollisionMask.Player
         
@@ -47,7 +47,7 @@ class MGRow {
         left.removeFromParent()
     }
     
-    func moveUpBy(amt: CGFloat) {
+    func moveUpBy(_ amt: CGFloat) {
         
         left.position.y += amt
         right.position.y += amt

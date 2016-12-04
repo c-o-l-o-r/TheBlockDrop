@@ -10,10 +10,10 @@ import Foundation
 import SpriteKit
 
 class MGLevel {
-    private let row : MGRow!
-    private let obstacle1 : SKSpriteNode!
-    private let obstacle2 : SKSpriteNode!
-    private var hasBeenCompleted = false
+    fileprivate let row : MGRow!
+    fileprivate let obstacle1 : SKSpriteNode!
+    fileprivate let obstacle2 : SKSpriteNode!
+    fileprivate var hasBeenCompleted = false
     
     init(scene: SKScene,height: CGFloat, color: UIColor) {
         row = MGRow(scene: scene, height: height, color: color)
@@ -30,13 +30,13 @@ class MGLevel {
         obstacle2 = SKSpriteNode(color: color, size: CGSize(width: 25, height: 25))
         obstacle2.position = CGPoint(x: randomXPos2, y: height - randomYPos1 - scene.frame.height * 0.2)
         
-        obstacle1.physicsBody = SKPhysicsBody(rectangleOfSize: obstacle1.size)
-        obstacle1.physicsBody?.dynamic = false
+        obstacle1.physicsBody = SKPhysicsBody(rectangleOf: obstacle1.size)
+        obstacle1.physicsBody?.isDynamic = false
         obstacle1.physicsBody?.categoryBitMask = CollisionMask.Obstacle
         obstacle1.physicsBody?.contactTestBitMask = CollisionMask.Player
         
-        obstacle2.physicsBody = SKPhysicsBody(rectangleOfSize: obstacle2.size)
-        obstacle2.physicsBody?.dynamic = false
+        obstacle2.physicsBody = SKPhysicsBody(rectangleOf: obstacle2.size)
+        obstacle2.physicsBody?.isDynamic = false
         obstacle2.physicsBody?.categoryBitMask = CollisionMask.Obstacle
         obstacle2.physicsBody?.contactTestBitMask = CollisionMask.Player
         
@@ -53,7 +53,7 @@ class MGLevel {
     }
     
     // Used to move the level up in the view, giving the appearence of it moving
-    func moveUpBy(amt: CGFloat) {
+    func moveUpBy(_ amt: CGFloat) {
         
         row.moveUpBy(amt)
         

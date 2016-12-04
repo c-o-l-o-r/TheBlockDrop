@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "49E6F52A913F13598198ECE7197888E25A3E8DAE",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "49E6F52A913F13598198ECE7197888E25A3E8DAE" : 9223372036854775807,
+    "D79FB765F6979CFE3491F6991E3DC9B3CE2C0C5F" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "7FB61588-B73A-44C5-92CD-139973C1DA24",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "49E6F52A913F13598198ECE7197888E25A3E8DAE" : "BlockDrop\/",
+    "D79FB765F6979CFE3491F6991E3DC9B3CE2C0C5F" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "BlockDrop",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "BlockDrop.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/c-o-l-o-r\/TheBlockDrop.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "49E6F52A913F13598198ECE7197888E25A3E8DAE"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/uclaacm\/bruin-check-iOS.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "D79FB765F6979CFE3491F6991E3DC9B3CE2C0C5F"
+    }
+  ]
+}

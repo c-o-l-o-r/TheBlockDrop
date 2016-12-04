@@ -18,14 +18,14 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameViewController.showLeaderboard), name: "showLeaderboard", object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(GameViewController.showLeaderboard), name: NSNotification.Name(rawValue: "showLeaderboard"), object: nil)
         
         let scene = MainMenu(size: view.bounds.size)
         let skView = view as! SKView
         skView.showsFPS = false
         skView.showsNodeCount = false
         skView.ignoresSiblingOrder = true
-        scene.scaleMode = .ResizeFill
+        scene.scaleMode = .resizeFill
         skView.presentScene(scene)
         
         let completionBlock: () -> Void = {
@@ -34,17 +34,17 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate {
             self.showBannerWithCustomFrame(scene)
         }
         
-        let failureBlock: (NSError?) -> Void = {error in
+        let failureBlock: (Error?) -> Void = {error in
             NSLog("[RevMob Sample App] Session failed to start with error: \(error!.localizedDescription)")
             canShowAds = false
         }
     
-    RevMobAds.startSessionWithAppID("57a2b2e6f1c368630b7984f8",
+    RevMobAds.startSession(withAppID: "57a2b2e6f1c368630b7984f8",
     withSuccessHandler: completionBlock,
     andFailHandler: failureBlock)
 }
 
-func showBannerWithCustomFrame(scene: SKScene){
+func showBannerWithCustomFrame(_ scene: SKScene){
     bannerView = RevMobAds.session().bannerView()
     let completionBlock: (RevMobBannerView?) -> Void = { bannerV in
         let x = CGFloat(0)
@@ -52,32 +52,32 @@ func showBannerWithCustomFrame(scene: SKScene){
         let width = CGFloat(scene.size.width)
         let height = CGFloat(60)
         self.bannerView!.frame = CGRect(origin: CGPoint(x: x, y: y), size: CGSize(width: width, height: height))
-        self.bannerView!.autoresizingMask = [.FlexibleTopMargin, .FlexibleWidth] //Optional Parameters to handle Rotation Events
+        self.bannerView!.autoresizingMask = [.flexibleTopMargin, .flexibleWidth] //Optional Parameters to handle Rotation Events
         self.view.addSubview(self.bannerView!)
     }
-    let failureHandler: (RevMobBannerView?, NSError?) -> Void = {bView, error in
+    let failureHandler: (RevMobBannerView?, Error?) -> Void = {bView, error in
         NSLog("[RevMob Sample App] BannerView failed to load with error: \(error!.localizedDescription)")
     }
     let clickHandler: (RevMobBannerView?) -> Void = {bView in
         NSLog("[RevMob Sample App] BannerView Clicked")
     }
-    self.bannerView!.loadWithSuccessHandler(completionBlock, andLoadFailHandler: failureHandler, onClickHandler: clickHandler)
+    self.bannerView!.load(successHandler: completionBlock, andLoadFailHandler: failureHandler, onClickHandler: clickHandler)
 }
 
     func showLeaderboard() {
         
         let gcVC: GKGameCenterViewController = GKGameCenterViewController()
         gcVC.gameCenterDelegate = self
-        gcVC.viewState = GKGameCenterViewControllerState.Leaderboards
+        gcVC.viewState = GKGameCenterViewControllerState.leaderboards
         gcVC.leaderboardIdentifier = "block_drop_highscores"
-        self.presentViewController(gcVC, animated: true, completion: nil)
+        self.present(gcVC, animated: true, completion: nil)
     }
     
-    func gameCenterViewControllerDidFinish(gcViewController: GKGameCenterViewController) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    func gameCenterViewControllerDidFinish(_ gcViewController: GKGameCenterViewController) {
+        self.dismiss(animated: true, completion: nil)
     }
     
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden: Bool {
         return true
     }
 }

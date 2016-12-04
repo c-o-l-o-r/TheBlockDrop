@@ -13,8 +13,6 @@
 		C908D3181D4865B1006ABA2C /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C908D3171D4865B1006ABA2C /* GameScene.swift */; };
 		C908D31A1D4865B1006ABA2C /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C908D3191D4865B1006ABA2C /* GameViewController.swift */; };
 		C908D31F1D4865B1006ABA2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C908D31E1D4865B1006ABA2C /* Assets.xcassets */; };
-		C908D32D1D4865B2006ABA2C /* BlockDropTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C908D32C1D4865B2006ABA2C /* BlockDropTests.swift */; };
-		C908D3381D4865B2006ABA2C /* BlockDropUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C908D3371D4865B2006ABA2C /* BlockDropUITests.swift */; };
 		C91306A91D55B097007FE378 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C91306A81D55B097007FE378 /* StoreKit.framework */; };
 		C9A275541D52EA9C003E17DF /* RevMobAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9A275531D52EA9C003E17DF /* RevMobAds.framework */; };
 		C9A275571D52EAD0003E17DF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9A275561D52EAD0003E17DF /* SystemConfiguration.framework */; };
@@ -59,11 +57,7 @@
 		C908D31E1D4865B1006ABA2C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C908D3231D4865B1006ABA2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C908D3281D4865B2006ABA2C /* BlockDropTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlockDropTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C908D32C1D4865B2006ABA2C /* BlockDropTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockDropTests.swift; sourceTree = "<group>"; };
-		C908D32E1D4865B2006ABA2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C908D3331D4865B2006ABA2C /* BlockDropUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlockDropUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C908D3371D4865B2006ABA2C /* BlockDropUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockDropUITests.swift; sourceTree = "<group>"; };
-		C908D3391D4865B2006ABA2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C91306A81D55B097007FE378 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		C9A275531D52EA9C003E17DF /* RevMobAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RevMobAds.framework; sourceTree = "<group>"; };
 		C9A275561D52EAD0003E17DF /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -118,8 +112,6 @@
 			isa = PBXGroup;
 			children = (
 				C908D3101D4865B1006ABA2C /* BlockDrop */,
-				C908D32B1D4865B2006ABA2C /* BlockDropTests */,
-				C908D3361D4865B2006ABA2C /* BlockDropUITests */,
 				C908D30F1D4865B1006ABA2C /* Products */,
 				C9A275551D52EAD0003E17DF /* Frameworks */,
 			);
@@ -157,24 +149,6 @@
 				C9A275621D52EBA6003E17DF /* BlockDrop-Bridging-Header.h */,
 			);
 			path = BlockDrop;
-			sourceTree = "<group>";
-		};
-		C908D32B1D4865B2006ABA2C /* BlockDropTests */ = {
-			isa = PBXGroup;
-			children = (
-				C908D32C1D4865B2006ABA2C /* BlockDropTests.swift */,
-				C908D32E1D4865B2006ABA2C /* Info.plist */,
-			);
-			path = BlockDropTests;
-			sourceTree = "<group>";
-		};
-		C908D3361D4865B2006ABA2C /* BlockDropUITests */ = {
-			isa = PBXGroup;
-			children = (
-				C908D3371D4865B2006ABA2C /* BlockDropUITests.swift */,
-				C908D3391D4865B2006ABA2C /* Info.plist */,
-			);
-			path = BlockDropUITests;
 			sourceTree = "<group>";
 		};
 		C9A275551D52EAD0003E17DF /* Frameworks */ = {
@@ -269,14 +243,14 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "Matt Garnett";
 				TargetAttributes = {
 					C908D30D1D4865B1006ABA2C = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = G7UGV2H9R6;
 						DevelopmentTeamName = "Matt Garnett";
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0810;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
@@ -288,6 +262,7 @@
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = JP8XHE3NT8;
 						DevelopmentTeamName = "Matt Garnett (Personal Team)";
+						LastSwiftMigration = 0810;
 						ProvisioningStyle = Automatic;
 						TestTargetID = C908D30D1D4865B1006ABA2C;
 					};
@@ -295,6 +270,7 @@
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = JP8XHE3NT8;
 						DevelopmentTeamName = "Matt Garnett (Personal Team)";
+						LastSwiftMigration = 0810;
 						ProvisioningStyle = Automatic;
 						TestTargetID = C908D30D1D4865B1006ABA2C;
 					};
@@ -370,7 +346,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C908D32D1D4865B2006ABA2C /* BlockDropTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,7 +353,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C908D3381D4865B2006ABA2C /* BlockDropUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,8 +398,10 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -472,8 +448,10 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";

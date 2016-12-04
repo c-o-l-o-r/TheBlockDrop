@@ -12,8 +12,8 @@ import GameKit
 
 class GameOverScene: SKScene {
     
-    private let message = "GAME OVER"
-    private let score_message = "Your score:"
+    fileprivate let message = "GAME OVER"
+    fileprivate let score_message = "Your score:"
     
     var gameOverGraphic : SKSpriteNode!
     var youGotText : SKSpriteNode!
@@ -24,7 +24,7 @@ class GameOverScene: SKScene {
     init(size: CGSize, score: Int) {
         super.init(size: size)
         
-        self.backgroundColor = SKColor.whiteColor()
+        self.backgroundColor = SKColor.white
         
         // Set up scene
         gameOverGraphic = SKSpriteNode(imageNamed: "gameOverGraphic.png")
@@ -37,7 +37,7 @@ class GameOverScene: SKScene {
         playAgainButton.name = "PLAY"
         playAgainButton.position = CGPoint(x: self.size.width / 2, y: self.size.height / 4)
         
-        scoresButton = SKSpriteNode(imageNamed: "scoresButtonFilled.png")
+        scoresButton = SKSpriteNode(imageNamed: "scoresButton.png")
         scoresButton.name = "SCORES"
         scoresButton.position = CGPoint(x: self.size.width * 0.75, y: self.size.height / 10)
         
@@ -47,7 +47,7 @@ class GameOverScene: SKScene {
         
         let scoreLabel = SKLabelNode(fontNamed: "comic andy")
         scoreLabel.text = "\(score)"
-        scoreLabel.fontColor = .blackColor()
+        scoreLabel.fontColor = .black
         scoreLabel.fontSize = 120
         scoreLabel.position = CGPoint(x: self.size.width * 0.65, y: self.size.height * 0.38)
         
@@ -60,12 +60,12 @@ class GameOverScene: SKScene {
         addChild(homeButton)
         
         // Get the users highest local score
-        let defaults = NSUserDefaults.standardUserDefaults()
-        let highScore = defaults.integerForKey("highScore")
+        let defaults = UserDefaults.standard
+        let highScore = defaults.integer(forKey: "highScore")
         
         // If the new score is higher than the local high score, upload it to Game Center & update it locally
         if highScore < score {
-            defaults.setInteger(score, forKey: "highScore")
+            defaults.set(score, forKey: "highScore")
             defaults.synchronize()
             sendScoreToGameCenter(score)
         }
@@ -73,72 +73,72 @@ class GameOverScene: SKScene {
 
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         let touch:UITouch = touches.first! as UITouch
-        let positionInScene = touch.locationInNode(self)
-        let touchedNode = self.nodeAtPoint(positionInScene)
+        let positionInScene = touch.location(in: self)
+        let touchedNode = self.atPoint(positionInScene)
         
         if let name = touchedNode.name
         {
             if name == "PLAY"
             {
-                playAgainButton.runAction(SKAction.scaleTo(0.9, duration: 0.2))
+                playAgainButton.run(SKAction.scale(to: 0.9, duration: 0.2))
             } else if name == "SCORES" {
-                scoresButton.runAction(SKAction.scaleTo(0.9, duration: 0.2))
+                scoresButton.run(SKAction.scale(to: 0.9, duration: 0.2))
             } else if name == "HOME" {
-                homeButton.runAction(SKAction.scaleTo(0.9, duration: 0.2))
+                homeButton.run(SKAction.scale(to: 0.9, duration: 0.2))
             }
             
         }
         
     }
     
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         let touch:UITouch = touches.first! as UITouch
-        let positionInScene = touch.locationInNode(self)
-        let touchedNode = self.nodeAtPoint(positionInScene)
+        let positionInScene = touch.location(in: self)
+        let touchedNode = self.atPoint(positionInScene)
         
         if let name = touchedNode.name
         {
             if name == "BG"
             {
-                playAgainButton.runAction(SKAction.scaleTo(1.0, duration: 0.15))
-                scoresButton.runAction(SKAction.scaleTo(1.0, duration: 0.15))
-                homeButton.runAction(SKAction.scaleTo(1.0, duration: 0.15))
+                playAgainButton.run(SKAction.scale(to: 1.0, duration: 0.15))
+                scoresButton.run(SKAction.scale(to: 1.0, duration: 0.15))
+                homeButton.run(SKAction.scale(to: 1.0, duration: 0.15))
             }
         }
         
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         let touch:UITouch = touches.first! as UITouch
-        let positionInScene = touch.locationInNode(self)
-        let touchedNode = self.nodeAtPoint(positionInScene)
+        let positionInScene = touch.location(in: self)
+        let touchedNode = self.atPoint(positionInScene)
         
         if let name = touchedNode.name
         {
             if name == "PLAY"
             {
-                playAgainButton.runAction(SKAction.scaleTo(1.0, duration: 0.2))
-                let transition = SKTransition.moveInWithDirection(SKTransitionDirection.Right, duration: 0.3)
+                playAgainButton.run(SKAction.scale(to: 1.0, duration: 0.2))
+                let transition = SKTransition.moveIn(with: SKTransitionDirection.right, duration: 0.3)
                 let gameScene = GameScene(size: self.size)
                 self.view?.presentScene(gameScene, transition: transition)
             }
             
             if name == "SCORES"
             {
-                scoresButton.runAction(SKAction.scaleTo(1.0, duration: 0.2))
-                NSNotificationCenter.defaultCenter().postNotificationName("showLeaderboard", object: nil)
+                scoresButton.run(SKAction.scale(to: 1.0, duration: 0.2))
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "showLeaderboard"), object: nil)
 
             }
             
             if name == "HOME"
             {
-                homeButton.runAction(SKAction.scaleTo(1.0, duration: 0.2))
-                let transition = SKTransition.moveInWithDirection(SKTransitionDirection.Left, duration: 0.3)
+                homeButton.run(SKAction.scale(to: 1.0, duration: 0.2))
+                let transition = SKTransition.moveIn(with: SKTransitionDirection.left, duration: 0.3)
                 let mainMenu = MainMenu(size: self.size)
                 self.view?.presentScene(mainMenu, transition: transition)
             }
@@ -146,16 +146,16 @@ class GameOverScene: SKScene {
         
     }
     
-    func sendScoreToGameCenter(s: Int) {
+    func sendScoreToGameCenter(_ s: Int) {
         
         let scoreObject = GKScore(leaderboardIdentifier: "block_drop_highscores")
         scoreObject.value = Int64(s)
-        GKScore.reportScores([scoreObject]) { (error) -> Void in
+        GKScore.report([scoreObject], withCompletionHandler: { (error) -> Void in
             guard error == nil else {
                 print("Error in reporting leaderboard scores: \(error)")
                 return
             }
-        }
+        }) 
     }
     
     required init?(coder aDecoder: NSCoder) {

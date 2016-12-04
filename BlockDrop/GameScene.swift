@@ -8,6 +8,30 @@
 
 import SpriteKit
 import AudioToolbox
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
@@ -25,8 +49,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var score = 0
     
     // Initialize game
-    override func didMoveToView(_: SKView) {
-        backgroundColor = SKColor.whiteColor()
+    override func didMove(to _: SKView) {
+        backgroundColor = SKColor.white
         self.physicsWorld.gravity = kGRAVITY
         self.physicsWorld.contactDelegate = self
         
@@ -36,10 +60,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         scoreBoard = SKLabelNode(fontNamed: "comic andy")
         scoreBoard.text = "0"
-        scoreBoard.fontColor = .blackColor()
+        scoreBoard.fontColor = .black
         scoreBoard.fontSize = 48
         scoreBoard.position = CGPoint(x: self.frame.width - 10, y: 13)
-        scoreBoard.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Right
+        scoreBoard.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.right
         addChild(scoreBoard)
         
         addBoundries()
@@ -47,13 +71,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addLevel(self.frame.height / 4)
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
             
             if playerIsDead { return }
             
             // Determine location of touch
-            if touch.locationInNode(self).x < self.frame.width / 2 {
+            if touch.location(in: self).x < self.frame.width / 2 {
                 // Touch is on left half of screen
                 player.physicsBody?.velocity = CGVector(dx: 0, dy:0)
                 player.physicsBody?.applyImpulse(kLEFT_IMPULSE)
@@ -68,15 +92,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 player.physicsBody?.affectedByGravity = true
                 
                 // Remove instructions graphic
-                let a = SKAction.fadeOutWithDuration(0.15)
-                instructions.runAction(a, completion: ( {
+                let a = SKAction.fadeOut(withDuration: 0.15)
+                instructions.run(a, completion: ( {
                     self.instructions.removeFromParent()
                 } ))
             }
         }
     }
     
-    override func update(currentTime: CFTimeInterval) {
+    override func update(_ currentTime: TimeInterval) {
         
         if(player.physicsBody?.affectedByGravity == true && player.position.y < self.frame.height / 2 + player.size.width + 5) {
            
@@ -98,20 +122,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if levels.first?.getCurrentHeight() > self.frame.height + self.frame.height / 2 {
             levels.first?.removeNodesFromParent()
-            levels.removeAtIndex(0)        }
+            levels.remove(at: 0)        }
     }
     
     func changeScenes() {
         
         if #available(iOS 9.0, *) {
             let action = SKAction.applyForce(CGVector(dx: 0, dy: 0), duration: 1)
-            player.runAction(action, completion: {
-                let transition = SKTransition.fadeWithColor(.whiteColor(), duration: 0.5)
+            player.run(action, completion: {
+                let transition = SKTransition.fade(with: .white, duration: 0.5)
                 let gameOverScene = GameOverScene(size: self.size, score: self.score)
                 self.view?.presentScene(gameOverScene, transition: transition)
             })
         } else {
-            let transition = SKTransition.fadeWithColor(.whiteColor(), duration: 0.5)
+            let transition = SKTransition.fade(with: .white, duration: 0.5)
             let gameOverScene = GameOverScene(size: self.size, score: self.score)
             self.view?.presentScene(gameOverScene, transition: transition)
         }
@@ -124,7 +148,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let completionBlock: (RevMobFullscreen?) -> Void = {fullscreen in
             fullscreen?.showAd()
                     }
-        let failureBlock: (RevMobFullscreen?,NSError?) -> Void = { fullscreen,error in
+        let failureBlock: (RevMobFullscreen?,Error?) -> Void = { fullscreen,error in
             NSLog("[RevMob Sample App] Fullscreen failed to load with error: \(error?.localizedDescription)")
             self.changeScenes()
         }
@@ -137,12 +161,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let gameOverScene = GameOverScene(size: self.size, score: self.score)
             self.view?.presentScene(gameOverScene)
         }
-        fs?.loadWithSuccessHandler(completionBlock, andLoadFailHandler: failureBlock, onClickHandler: onClickHandler, onCloseHandler: onCloseHandler)
+        fs?.load(successHandler: completionBlock, andLoadFailHandler: failureBlock, onClickHandler: onClickHandler, onCloseHandler: onCloseHandler)
     }
 
     
     // Determine if the player came into contact w/ an obstacle, and end the game if necessary
-    func didBeginContact(contact: SKPhysicsContact) {
+    func didBegin(_ contact: SKPhysicsContact) {
         if(contact.bodyA.node?.name != "MOVER" && contact.bodyB.node?.name != "MOVER" && contact.bodyA.node?.name != "BOUNDARY" && contact.bodyB.node?.name != "BOUNDARY" && !playerIsDead) {
             
             AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
